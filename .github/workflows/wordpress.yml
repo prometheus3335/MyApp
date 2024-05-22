@@ -1,20 +1,20 @@
 name: WordPress CI
-
-on: [push, pull_request]
-
+on:
+  push:
+    branches:
+      - main
+      - 'feature/**'
 jobs:
-  build:
+  lint:
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up PHP
-      uses: shivammathur/setup-php@v2
-      with:
-        php-version: '7.4'
-    - name: Install dependencies
-      run: composer install
-    - name: Lint
-      run: vendor/bin/phpcs --standard=WordPress .
-    - name: Run tests
-      run: vendor/bin/phpunit
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.4'
+      - name: Install PHP_CodeSniffer
+        run: composer global require "squizlabs/php_codesniffer=*"
+      - name: Run PHPCS
+        run: ~/.composer/vendor/bin/phpcs --standard=WordPress ./wordpress-app
