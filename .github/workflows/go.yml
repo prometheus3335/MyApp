@@ -20,3 +20,9 @@ jobs:
         run: go test ./...
       - name: Lint code
         run: golangci-lint run ./...
+      - name: Build Docker image
+        run: docker build -t myapp-go .
+
+      - name: Push Docker image
+        run: docker tag myapp-go:latest pritesh3335/myapp-go:latest && docker push pritesh3335/myapp-go:latest
+
