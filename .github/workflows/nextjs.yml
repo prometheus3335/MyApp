@@ -22,3 +22,8 @@ jobs:
         run: npm test
       - name: Build project
         run: npm run build
+      - name: Build Docker image
+        run: docker build -t myapp-nextjs .
+
+      - name: Push Docker image
+        run: docker tag myapp-nextjs:latest pritesh3335/myapp-nextjs:latest && docker push pritesh3335/myapp-nextjs:latest
