@@ -1,0 +1,23 @@
+node : hello world workflow
+on :
+push :
+branches :
+  - main
+pull_request :
+  - main
+workflow_dispatch :
+  jobs :
+    hello :
+      runs-on : ububntu-latest
+      steps :
+        - uses : actions/checkout@v2
+        - name : hello world
+          run : echo "welcome to devops world"
+          shell : bash
+
+goodbye :
+runs-on : ubuntu-latest
+steps :
+ - name : goodbye world
+   run : echo "bye bye jagan"
+   shell : bash
